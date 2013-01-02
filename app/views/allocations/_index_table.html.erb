@@ -1,0 +1,28 @@
+<% if allocations.present? %>
+<table class="table index">
+  <thead>
+    <tr>
+      <th colspan="3">Transaction</th>
+      <th class="money">Amount</th>
+      <th class="money" colspan="2">Allocated</th>
+    </tr>
+  </thead>
+
+  <% allocations.each do |allocation| %>
+    <tr class="<%= css_classes_for_allocation allocation%>" data-href="<%= url_for allocation %>">
+      <td><%= allocation.transaction.account.name %></td>
+      <td><%= l allocation.transaction.booking_date.to_date %></td>
+      <td class="text"><%= allocation.transaction.details %></td>
+      <td class="money"><%= amount_to_currency allocation.transaction.amount %></td>
+      <td class="budget">
+        <%= allocation.budget.name %>
+      </td>
+      <td class="money"><%= amount_to_currency allocation.amount %></td>
+    </tr>
+  <% end %>
+</table>
+<% else %>
+  <p>
+    No allocations present.
+  </p>
+<% end %>

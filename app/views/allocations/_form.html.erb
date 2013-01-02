@@ -1,0 +1,35 @@
+<%= form_for(@allocation) do |f| %>
+  <% if @allocation.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@allocation.errors.count, "error") %> prohibited this allocation from being saved:</h2>
+
+      <ul>
+      <% @allocation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table">
+    <tr>
+      <th>
+        <%= f.label :budget_id %>
+      </th>
+      <td>
+        <%= f.collection_select :budget_id, Budget.all, :id, :name, :include_blank => true %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :amount %></th>
+      <td><%= f.number_field :amount %></td>
+    </tr>
+  </table>
+
+  <div class="actions">
+    <%= f.submit :class => "btn btn-primary" %>
+    <%= link_to 'Back', allocations_path %>
+  </div>
+
+  <%= f.hidden_field :transaction_id, :value => @allocation.transaction.id %>
+<% end %>

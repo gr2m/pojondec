@@ -1,0 +1,104 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+@import "twitter/bootstrap/bootstrap";
+
+//= require_self
+//= require_tree
+
+body {
+  padding: 40px 0 0;
+}
+
+.table {
+  &.index {
+    th, td {
+      &.money, &.date, &.number {
+        text-align: right;
+      }
+    }
+  }
+
+  td, th {
+    white-space: nowrap;
+  }
+
+  th label {
+    font-weight: bold;
+  }
+
+  .text {
+    white-space: normal;
+    width: 100%;
+    pre {
+      font: inherit;
+      margin: 0;
+      background: transparent;
+      border: 0;
+      padding: 0;
+    }
+  }
+
+  tr.new {
+    
+  }
+
+  td.actions {
+    width: 1px;
+  }
+
+  [data-href]:hover {
+    background: #eee;
+    cursor: pointer;
+  }
+  tfoot, thead + tbody tr:first-child {
+    td {
+      border-top: 2px solid #999;
+    }
+  }
+}
+
+.debit {
+  .money, &.money {
+    color: #c00;
+  }
+}
+
+.credit {
+  .money, &.money {
+    color: #390;
+  }
+}
+
+div.budget table .budget {
+  display: none;
+}
+
+.dashboard {
+  .label, tfoot {
+    display: none;
+  }
+
+  .accounts {
+    .text {
+      display: none; 
+    }
+  }
+
+  .accounts, .budgets {
+    table td:first-child {
+      width: 100%;
+    }
+  }
+}

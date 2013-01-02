@@ -1,0 +1,29 @@
+<%= form_for(@budget) do |f| %>
+  <% if @budget.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@budget.errors.count, "error") %> prohibited this budget from being saved:</h2>
+
+      <ul>
+      <% @budget.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table">
+    <tr>
+      <th>
+        <%= f.label :name %>
+      </th>
+      <td>
+        <%= f.text_field :name %>
+      </td>
+    </tr>
+  </table>
+
+  <div class="actions">
+    <%= f.submit :class => 'btn' %>
+    <%= link_to 'Back', budgets_path %>
+  </div>
+<% end %>

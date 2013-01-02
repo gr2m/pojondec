@@ -1,0 +1,33 @@
+
+
+<h1>
+  <%= @account.name %>
+</h1>
+
+<table class="table">
+
+  <tr>
+    <th>Currency</th>
+    <td><%= @account.currency %></td>
+  </tr>
+
+  <tr>
+    <th>Details</th>
+    <td class="text">
+      <pre><%= @account.details %></pre>
+    </td>
+  </tr>
+</table>
+
+<h3>
+  Transactions
+  <small>
+    (<%= @account.transactions.count %>)
+  </small>
+</h3>
+
+<%= render 'transactions/index_table', :transactions => @account.transactions %>
+
+<%= link_to 'Edit', edit_account_path(@account), :class => 'btn btn-primary' %>
+<%= link_to 'Destroy', @account, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+<%= link_to 'Back', accounts_path %>

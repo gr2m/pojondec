@@ -1,0 +1,60 @@
+<%= form_for(@account) do |f| %>
+  <% if @account.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+      <% @account.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table">
+  <tr>
+    <th>
+      <%= f.label :name %>
+    </th>
+    <td>
+      <%= f.text_field :name %>
+    </td>
+  </div>
+  <tr>
+    <th>
+      <%= f.label :number %>
+    </th>
+    <td>
+      <%= f.text_field :number %>
+    </td>
+  </div>
+  <tr>
+    <th>
+      <%= f.label :currency %>
+    </th>
+    <td>
+      <%= f.text_field :currency %>
+    </td>
+  </div>
+  <tr>
+    <th>
+      <%= f.label :processor %>
+    </th>
+    <td>
+      <%= f.select :processor, UPLOAD_PROCESSORS, :include_blank => true %>
+    </td>
+  </div>
+  <tr>
+    <th>
+      <%= f.label :details %>
+    </th>
+    <td>
+      <%= f.text_area :details, :rows => 5 %>
+    </td>
+  </div>
+  </table>
+  <div class="actions">
+    <%= f.submit :class => 'btn btn-primary' %> 
+    <%= link_to 'Back', @account %>
+  </div>
+<% end %>

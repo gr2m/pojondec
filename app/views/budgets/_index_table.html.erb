@@ -1,0 +1,23 @@
+<% if budgets.count %>
+<table class="table index">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="number" colspan="2">Allocations</th>
+    </tr>
+  </thead>
+
+<% budgets.each do |budget| %>
+  <tr class="<%= css_classes_for_budget budget %>" data-href="<%= url_for budget %>">
+    <td><%= budget.name %></td>
+    <td class="number"><%= budget.allocations.count %></td>
+    <td class="money"><%= amount_to_currency budget.allocations.sum :amount %></td>
+  </tr>
+<% end %>
+</table>
+
+<% else %>
+<p>
+  No budgets. 
+</p>
+<% end %>

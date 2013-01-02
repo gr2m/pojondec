@@ -1,0 +1,33 @@
+<h1>Transactions</h1>
+
+<% if @transactions.count > 0 %>
+
+  <%= form_for @search, :url => transactions_path, :html => {:method => :get, :class => 'well'} do |f| %>
+    <p>
+      <%= f.label :account_id_equals, 'Account' %>
+      <%= f.collection_select :account_id_equals, Account.all, :id, :name, :include_blank => true %><br />
+    </p>
+
+    <p>
+      <%= f.check_box :is_new_is_true %> new<br />
+    </p>
+
+    <!--
+    <%= f.label :upload_id_equals, 'Upload' %>
+    <%= f.collection_select :upload_id_equals, Upload.all, :id, :filename, :include_blank => true %><br />
+    <%= f.label :booking_date_less_than, 'Transactions before' %>
+    <%= f.datetime_select :booking_date_less_than, :include_blank => true %><br />
+    <%= f.label :booking_date_greater_than, 'Transactions after' %>
+    <%= f.datetime_select :booking_date_greater_than, :include_blank => true %><br />
+    -->
+
+    <%= f.submit 'search', :class => 'btn btn-primary' %>
+  <% end %>
+
+  <%= render 'transactions/index_table', :transactions => @transactions %>
+
+<% end %>
+
+<p>
+  <%= link_to 'New Transaction', new_transaction_path, :class => 'btn' %>
+</p>

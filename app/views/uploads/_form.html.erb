@@ -1,0 +1,29 @@
+<%= form_for(@upload) do |f| %>
+  <% if @upload.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h2>
+
+      <ul>
+      <% @upload.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table">
+    <tr>
+      <th><%= f.label :account %></th>
+      <td><%= f.collection_select :account_id, Account.all, :id, :name, :include_blank => true %></td>
+    </div>
+    <tr>
+      <th><%= f.label :file %></th>
+      <td><%= f.file_field :file %></td>
+    </div>
+  </table>
+
+  <p class="actions">
+    <%= f.submit :class => 'btn btn-primary' %>
+    <%= link_to 'Back', uploads_path %>
+  </p>
+<% end %>

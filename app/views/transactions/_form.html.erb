@@ -1,0 +1,64 @@
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table">
+    <tr>
+      <th><%= f.label :account %></th>
+      <td><%= f.collection_select :account_id, Account.all, :id, :name %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :booking_date %></th>
+      <td><%= f.date_select :booking_date %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :amount %></th>
+      <td><%= f.number_field :amount %></td>
+    </tr>
+    <tr>
+      <th class="span2"><%= f.label :details %></th>
+      <td><%= f.text_area :details, :rows => 5, :class => "span10" %></td>
+    </tr>
+  </table>
+
+  <h3>
+    Allocations
+  </h3>
+
+  <table class="table">
+    <tr>
+      <th>Budget</th>
+      <th>Amount</th>
+    </tr>
+
+    <%= f.fields_for :allocations do |allocations_form| %>
+      <tr>
+        <td><%= Budget.find(allocations_form.object.budget_id).name %></td>
+        <td>
+          <%= allocations_form.hidden_field :budget_id, :value => allocations_form.object.budget_id %>
+          <%= allocations_form.number_field :amount %>
+        </td>
+      </tr>
+    <% end %>
+
+  </table>
+  
+
+
+  <div class="actions">
+    <% if @transaction.persisted? and @transaction.is_new? == false%>
+      <p><%= f.check_box :is_new %> als neu markieren<br></p>
+    <% end %>
+    <p><%= f.submit :class => 'btn btn-primary' %>
+        <%= link_to 'Back', transactions_path %></p>
+  </div>
+<% end %>

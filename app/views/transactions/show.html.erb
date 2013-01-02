@@ -1,0 +1,63 @@
+<h1>
+  Transaction #<%= @transaction.id %>
+  <%= new_badge if @transaction.is_new? %>
+</h1>
+
+<table class="table">
+  <tr>
+    <th>Account:</th>
+    <td><%= @transaction.account.name %></td>
+  </tr>
+
+  <tr>
+    <th>Booking date:</th>
+    <td><%= @transaction.booking_date %></td>
+  </tr>
+
+  <tr>
+    <th>Amount:</th>
+    <td><%= number_to_currency @transaction.amount.to_f / 100, :unit => @transaction.account.currency, :format => "%n %u" %></td>
+  </tr>
+
+  <tr>
+    <th>Details:</th>
+    <td><%= @transaction.details %></td>
+  </tr>
+
+  <tr>
+    <th>Upload:</th>
+    <td><%= @transaction.upload.try :filename %></td>
+  </tr>
+</table>
+
+<h3>
+  Allocations
+</h3>
+
+<% if @transaction.allocations.count > 0 %>
+  <table class="table">
+    <tr>
+      <th>Budget</th>
+      <th>Amount</th>
+    </tr>
+
+  <% @transaction.allocations.each do |allocation| %>
+    <tr>
+      <td><%= allocation.budget.name %></td>
+      <td>
+        <%= number_to_currency allocation.amount.to_f / 100, :unit => @transaction.account.currency, :format => "%n %u" %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <p>none.</p>
+<% end %>
+
+
+
+<p>
+  <%= link_to 'Edit', edit_transaction_path(@transaction), :class => "btn btn-primary" %>
+  <%= link_to 'Destroy', @transaction, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+  <%= link_to 'Back', transactions_path %>
+</p>

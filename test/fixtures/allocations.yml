@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  amount: 1
+  budget_id: 
+  transaction: 
+
+two:
+  amount: 1
+  budget_id: 
+  transaction: 

@@ -1,0 +1,22 @@
+<div class="budget">
+  <h1>
+    <%= @budget.name %>
+  </h1>
+
+  
+
+  <h3>
+    Allocations
+    <small>
+      (<%= @budget.allocations.count %>)
+    </small>
+  </h3>
+
+  <%= render 'allocations/index_table', :allocations => @budget.allocations %>
+
+
+  <%= link_to 'Edit', edit_budget_path(@budget), :class => "btn" %>
+  <%= link_to 'Back', budgets_path %>
+
+
+</div>

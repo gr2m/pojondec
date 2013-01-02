@@ -1,0 +1,1 @@
+Pojondec::Application.config.password = 'funkyfresh'

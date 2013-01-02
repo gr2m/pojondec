@@ -1,0 +1,31 @@
+<h1>Uploads</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Filename</th>
+      <th>Uploaded at</th>
+      <th colspan="2" class="number">Transactions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @uploads.each do |upload| %>
+    <tr class="<%= css_classes_for_upload upload %>" data-href="<%= url_for upload%>">
+      <td>
+        <%= new_badge unless upload.is_processed? %>
+        <%= upload.account.try :name %>
+      </td>
+      <td><%= link_to upload.filename, url_for(upload) + '.csv' %></td>
+      <td><%= upload.created_at.strftime "%d.%m.%Y" %></td>
+      <td class="money"><%= amount_to_currency upload.transactions.sum(:amount), :unit => upload.account.currency, :format => "%n %u" %></td>    
+      <td class="number"><%= link_to upload.transactions.count, transactions_path(:search => { :upload_id_equals => upload.id }) %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Upload', new_upload_path, :class => 'btn btn-primary' %>

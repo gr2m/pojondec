@@ -1,0 +1,26 @@
+<% if accounts.present? %>
+<table class="table index">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="text">Details</th>
+      <th colspan="2" class="number">Transactions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% accounts.each do |account| %>
+    <tr class="<%= account.transactions.sum(:amount) < 0 ? 'debit' : 'credit' %>" data-href="<%= url_for account%>">
+      <td><%= account.name %></td>
+      <td class="text"><pre><%= account.details %></pre></td>
+      <td class="number"><%= account.transactions.count %></td>
+      <td class="money"><%= amount_to_currency account.transactions.sum(:amount), :unit => account.currency %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>
+  No accounts present yet.
+</p>
+<% end %>

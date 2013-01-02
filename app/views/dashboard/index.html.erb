@@ -1,0 +1,51 @@
+<div class="dashboard">
+  <div class="hero-unit">
+    <h1>Pojondec!</h1>
+    <p>Because.</p>
+
+    <hr>
+      <%= form_for @import, :url => import_path do |f| %>
+        <p>
+          <%= f.file_field(:files, :multiple => :multiple) %><br>
+          <%= f.submit "Import", :class => "btn btn-primary" %>
+          <small>(1 or multiple files)</small>
+        </p>
+      <% end %>
+  </div>
+
+  <div class="row">
+    <div class="span8">
+      <div class="uploads">
+      </div>
+      <div class="transactions">
+        <h3>
+          <%= link_to "New Transactions", new_transactions_path %>
+          <small>
+            (<%= @new_transactions.count %>)
+          </small>
+        </h3>
+
+        <%= render 'transactions/index_table', :transactions => @new_transactions.limit(10) %>
+
+      </div>
+    </div>
+    <div class="span4">
+      <div class="budgets">
+        <h3><%= link_to "Budgets", budgets_path %></h3>
+        <%= render 'budgets/index_table', :budgets => @budgets %>
+      </div>
+
+      <div class="accounts">
+        <h3><%= link_to "Accounts", accounts_path %></h3>
+        <%= render 'accounts/index_table', :accounts => @accounts %>
+      </div>
+    </div>
+  </div>
+
+  <div class="allocations">
+    <h3><%= link_to "Latest allocations", allocations_path %></h3>
+
+    <%= render 'allocations/index_table', :allocations => @allocations.limit(10) %>
+  </div>
+
+</div>

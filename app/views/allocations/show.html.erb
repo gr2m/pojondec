@@ -1,0 +1,24 @@
+
+
+<table class="table <%= css_classes_for_allocation @allocation %>">
+  <tr>
+    <th>Amount:</th>
+    <td class="money"><%= amount_to_currency @allocation.amount %></td>
+  </tr>
+
+  <tr>
+    <th>Budget:</th>
+    <td><%= @allocation.budget.name %></td>
+  </tr>
+
+  <tr>
+    <th>Transaction:</th>
+    <td>
+      <%= link_to "##{@allocation.transaction.id}", @allocation.transaction %>
+    </td>
+  </tr>
+</table>
+
+
+<%= link_to 'Edit', edit_allocation_path(@allocation), :class => "btn btn-primary" %>
+<%= link_to 'Back', allocations_path %>
