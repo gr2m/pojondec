@@ -26,7 +26,7 @@ group :development do
   gem 'therubyracer'
 end
 
-group [:staging, :production] do
+group :production do
   gem 'pg'
 end
 
