@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    @new_transactions = Transaction.where('is_new = 1')
+    @new_transactions = Transaction.where(:is_new => true)
     @allocations = Allocation.scoped
     @budgets = Budget.all
     @accounts = Account.all

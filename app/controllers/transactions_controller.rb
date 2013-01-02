@@ -68,7 +68,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
     if @transaction.is_new?
       @transaction.is_new = false
-      next_new_transaction = Transaction.where("is_new = 't' AND id != #{@transaction.id}").first
+      next_new_transaction = Transaction.where(:is_new => true).where("id != #{@transaction.id}").first
 
       if next_new_transaction
         redirect = edit_transaction_path(next_new_transaction)
