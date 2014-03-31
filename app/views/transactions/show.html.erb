@@ -24,6 +24,13 @@
     <td><%= @transaction.details %></td>
   </tr>
 
+  <% if @transaction.note %>
+  <tr>
+    <th>Note:</th>
+    <td><%= @transaction.note %></td>
+  </tr>
+  <% end %>
+
   <tr>
     <th>Upload:</th>
     <td><%= @transaction.upload.try :filename %></td>

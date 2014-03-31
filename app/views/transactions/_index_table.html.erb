@@ -17,11 +17,22 @@
         </td>
         <td class="date"><%= l(transaction.booking_date.to_date) %></td>
         <td class="money"><%= amount_to_currency(transaction.amount, :unit => transaction.account.currency) %></td>
-        <td class="text"><%= transaction.details %></td>
+        <td class="text">
+          <%= transaction.details %>
+          <% unless transaction.allocations.empty? %>
+          <small style="display:block;margin: 8px 0 0; padding 8px 0 0; border-top: 1px solid #eee; color: #404040;">
+            <% transaction.allocations.each do |allocation| %>
+            <strong style="display: inline-block; width: 50px;"><%= allocation.budget.name %>:</strong>
+            <span class="money"><%= amount_to_currency(allocation.amount, :unit => transaction.account.currency) %></span>
+            <br>
+            <% end %>
+          </small>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
-  
+
   <tfoot>
     <tr class="<%= transactions.map(&:amount).sum < 0 ? 'debit' : 'credit' %>">
       <td colspan="2" class="date"><%= transactions.map(&:booking_date).min.strftime "%d.%m.%Y" %> - <%= transactions.map(&:booking_date).max.strftime "%d.%m.%Y" %></td>

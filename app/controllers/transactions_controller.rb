@@ -3,8 +3,8 @@ class TransactionsController < ApplicationController
   # GET /transactions.json
   def index
     @search = Transaction.search(params[:search])
-    @transactions = @search.order('id DESC').all
-    # @transactions = @search.order('booking_date DESC').all
+    # @transactions = @search.order('id DESC').all
+    @transactions = @search.order('booking_date DESC').all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,7 +37,7 @@ class TransactionsController < ApplicationController
   # GET /transactions/1/edit
   def edit
     @transaction = Transaction.find(params[:id])
-    
+
     ids = @transaction.allocations.map(&:budget_id)
     Budget.all.each do |budget|
       unless ids.include? budget.id

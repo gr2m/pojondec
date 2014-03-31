@@ -33,7 +33,7 @@
   </small>
 </h3>
 
-<%= render 'transactions/index_table', :transactions => @account.transactions %>
+<%= render 'transactions/index_table', :transactions => @account.transactions.order('booking_date DESC') %>
 
 <%= link_to 'Edit', edit_account_path(@account), :class => 'btn btn-primary' %>
 <%= link_to 'Destroy', @account, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>

@@ -13,4 +13,12 @@ module UploadsHelper
 
     classes.join ' '
   end
+
+  def transactions_from_to(upload)
+    return "" unless upload.transactions.present?
+    from = upload.transactions.minimum(:booking_date).strftime "%d.%m.%Y"
+    to = upload.transactions.maximum(:booking_date).strftime "%d.%m.%Y"
+
+    "#{from} - #{to}"
+  end
 end

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.7'
+gem 'libv8', '~> 3.16.14'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -23,7 +24,7 @@ end
 
 group :development do
   gem 'sqlite3'
-  gem 'therubyracer'
+  gem 'therubyracer', '~> 0.12.1'
 end
 
 group :production do

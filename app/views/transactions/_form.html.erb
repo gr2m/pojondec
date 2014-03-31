@@ -12,6 +12,8 @@
   <% end %>
 
   <table class="table">
+
+    <% if nil %>
     <tr>
       <th><%= f.label :account %></th>
       <td><%= f.collection_select :account_id, Account.all, :id, :name %></td>
@@ -26,7 +28,31 @@
     </tr>
     <tr>
       <th class="span2"><%= f.label :details %></th>
-      <td><%= f.text_area :details, :rows => 5, :class => "span10" %></td>
+      <td><%= f.text_area :details, :rows => 3, :class => "span10" %></td>
+    </tr>
+    <% end %>
+    <tr>
+        <th>Account:</th>
+        <td><%= @transaction.account.name %></td>
+      </tr>
+
+      <tr>
+        <th>Booking date:</th>
+        <td><%= @transaction.booking_date %></td>
+      </tr>
+
+      <tr>
+        <th>Amount:</th>
+        <td><%= number_to_currency @transaction.amount.to_f / 100, :unit => @transaction.account.currency, :format => "%n %u" %></td>
+      </tr>
+
+      <tr>
+        <th>Details:</th>
+        <td><%= @transaction.details %></td>
+      </tr>
+    <tr>
+      <th class="span2"><%= f.label :note %></th>
+      <td><%= f.text_area :note, :rows => 3, :class => "span10" %></td>
     </tr>
   </table>
 
