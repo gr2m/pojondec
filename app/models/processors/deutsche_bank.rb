@@ -12,7 +12,7 @@ class DeutscheBank
 
     return unless lines[0]['Ums']
     return unless lines[0] =~ pattern
-    
+
     return true
   end
 
@@ -37,8 +37,8 @@ class DeutscheBank
     transaction = upload.transactions.new
 
     transaction.booking_date = Date.parse row[0]
-    transaction.details      = row[2]
-    transaction.amount       = (row[3] or row[4]).gsub(/[,.]/, '').to_i
+    transaction.details      = row[4]
+    transaction.amount       = (row[13] or row[14]).gsub(/[,.]/, '').to_i
     transaction.account_id   = self.upload.account_id
 
     transaction.save
